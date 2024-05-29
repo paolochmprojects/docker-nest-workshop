@@ -15,6 +15,7 @@ ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}
 
 COPY --from=deps /app/node_modules ./node_modules
+RUN apt update && apt install -y openssl
 
 COPY . .
 
