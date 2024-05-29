@@ -1,3 +1,9 @@
-import {} from 'class-validator';
+import { IsString } from 'class-validator';
 
-export class CreateNoteDto {}
+export class CreateNoteDto {
+  @IsString()
+  title: string;
+
+  @IsString()
+  content: string;
+}

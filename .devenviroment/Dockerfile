@@ -4,7 +4,7 @@ USER root
 
 RUN apt update && \
     apt upgrade -y && \
-    apt install git -y
+    apt install git procps -y
 
 WORKDIR /app
 
