@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  dev:
+    build: .
+    container_name: node-dev
+    volumes:
+      - ..:/app
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+    ports:
+      - "3000:3000"
+
+  db:
+    image: postgres:16
+    environment:
+      - POSTGRES_USER=paolo
+      - POSTGRES_PASSWORD=supersecret
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
