@@ -29,9 +29,13 @@ export class NotesService {
     return note;
   }
 
-  update(id: string, updateNoteDto: UpdateNoteDto) {
-    console.log(updateNoteDto);
-    return `This action updates a #${id} note`;
+  async update(id: string, updateNoteDto: UpdateNoteDto) {
+    await this.findOne(id);
+    const noteUpdated = await this.databaseService.note.update({
+      where: { id },
+      data: { ...updateNoteDto },
+    });
+    return noteUpdated;
   }
 
   async remove(id: string) {

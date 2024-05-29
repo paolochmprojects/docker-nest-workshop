@@ -1,4 +1,4 @@
-FROM node:20-alpine3.19 as deps
+FROM node:20-bookworm-slim as deps
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN npm install
 
 
-FROM node:20-alpine3.19 as builder
+FROM node:20-bookworm-slim as builder
 
 WORKDIR /app
 
@@ -22,9 +22,11 @@ RUN npm run build
 RUN npx prisma generate
 
 
-FROM node:20-alpine3.19 as runner
+FROM node:20-bookworm-slim as runner
 
 WORKDIR /app
+
+RUN apt update && apt install -y openssl
 
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
